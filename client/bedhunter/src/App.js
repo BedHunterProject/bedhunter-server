@@ -34,9 +34,10 @@ class App extends Component {
     };
   
     render() {
-      return (
+        const App = () => (
         <>
       <Navbar />
+      <div>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/rooms/" component={Rooms} />
@@ -46,7 +47,13 @@ class App extends Component {
         <Route component={Error} />
         <p className="App-intro">{this.state.data}</p> 
       </Switch>
-    </>
+      </div>
+    </> )
+    
+    return (
+      <Switch>
+        <App/>
+      </Switch>
       );
     }
   }

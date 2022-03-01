@@ -7,6 +7,7 @@ export default function Home() {
   return <HeroComponent>
   <Banner title="Üdvözöllek a Bed Hunter weboldalán" subtitle="">
     <Link to='/rooms' class="btn-primary">Szobák megtekintése</Link>
+    <Link to='/promotions' class="btn-primary">Akcióink megtekintése</Link>
   </Banner>
   </HeroComponent>;
 
