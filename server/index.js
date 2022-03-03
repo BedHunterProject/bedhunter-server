@@ -21,28 +21,26 @@ app.get('/contact', function (req, res) {
     res.sendFile(html)
 })
 
-
-
 app.get('/promotions', function (req, res) {
     const html = path.join('../client/bedhunter/src/pages/Promotions.js')
     res.sendFile(html)
 })
 
-
-app.get('/rooms', function (req, res) {
+app.get('/rooms/', function (req, res) {
     const html = path.join('../client/bedhunter/src/pages/Rooms.js')
     res.sendFile(html)
 })
 
-
 app.get('/singleroom', function (req, res) {
     const html = path.join('../client/bedhunter/src/pages/SingleRoom.js')
     res.sendFile(html)
-})
+}) // ez még nem működik
 
+/*
 app.get('/style', function (req, res) {
     res.sendFile() // style.css helye kell ide
 })
+*/
 
 app.get('*', function (req, res) {
     const html = path.join('../client/bedhunter/src/pages/Error.js')
