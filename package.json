@@ -1,19 +1,12 @@
 {
-<<<<<<< HEAD
   "dependencies": {
-    "mysql": "^2.18.1"
-=======
+    "mysql": "^2.18.1"},
   "name": "bedhunter",
   "version": "1.0.0",
   "description": "bedhunter server",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": { "test": "echo \"Error: no test specified\" && exit 1" },
   "author": "bedhunter",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3"
->>>>>>> 95030bfd77b4fb845232bdcf4e43024bc265a812
-  }
+  "dependencies": { "express": "^4.17.3" }
 }

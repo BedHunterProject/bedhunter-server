@@ -7,18 +7,21 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+/*
 <<<<<<<< HEAD:bedhunter-server/index.js
 // environment variable PORT, vagy 5000, ha azon nem fut semmi
 ========
->>>>>>>> 95030bfd77b4fb845232bdcf4e43024bc265a812:index.js
+>>>>>>>> 95030bfd77b4fb845232bdcf4e43024bc265a812:index.js*/
 const path = require('path');
 
 app.listen(port, () => console.log('listening on port ' + port));
+
 /*
 app.get('express_backend', (req, res) => {
     res.send({express: 'connected to react'})
-})*/
+})
 
+/*
 app.get('/', function (req, res) {
     const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Home.js')
     res.sendFile(html)
@@ -48,9 +51,9 @@ app.get('/singleroom', function (req, res) {
 app.get('/style', function (req, res) {
     res.sendFile() // style.css helye kell ide
 })
-*/
+
 
 app.get('*', function (req, res) {
     const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Error.js')
     res.sendFile(html)
-})
+})*/
