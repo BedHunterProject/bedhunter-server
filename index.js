@@ -3,57 +3,57 @@
 // axios, jwt token
 // https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/
 
-
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-/*
-<<<<<<<< HEAD:bedhunter-server/index.js
-// environment variable PORT, vagy 5000, ha azon nem fut semmi
-========
->>>>>>>> 95030bfd77b4fb845232bdcf4e43024bc265a812:index.js*/
+const { v4: uuidv4 } = require('uuid');
+const bodyParser = require('body-parser');
 const path = require('path');
 
-app.listen(port, () => console.log('listening on port ' + port));
+app.use(bodyParser.json());
 
-/*
+const addRoutes = require('./routing/routing');
+addRoutes.addRoutes();
+addRoutes(app, null, null);
+
+app.get('/', (req, res, next) => {
+  res.status(200).send(`'Hello World!' Hello node! id: ${uuidv4()}`);
+});  
+
+
+const { initDB } = require('./services/db')
+
+
+app.use(express.static('public'));
+
+
+/*initDB(err, (db, myModel) => {
+  if(err) {return console.err(`DB error: ${err}`)} 
+  //addRoutes(app, db, myModel);
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
+});*/
+
+
 app.get('express_backend', (req, res) => {
     res.send({express: 'connected to react'})
 })
 
-/*
-app.get('/', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Home.js')
-    res.sendFile(html)
-})
-
-app.get('/contact', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Contact.js')
-    res.sendFile(html)
-})
-
-app.get('/promotions', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Promotions.js')
-    res.sendFile(html)
-})
-
-app.get('/rooms/', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Rooms.js')
-    res.sendFile(html)
-})
-
-app.get('/singleroom', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/SingleRoom.js')
-    res.sendFile(html)
-}) // ez még nem működik
-
-/*
-app.get('/style', function (req, res) {
-    res.sendFile() // style.css helye kell ide
-})
-
-
-app.get('*', function (req, res) {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Error.js')
-    res.sendFile(html)
-})*/
+//MIDDLEWARE
+app.use('/', function(req, res, next){
+    
+  var options = {
+      
+  };
+   
+  var fileName = 'C:/Users/Greg/Downloads/bedhunter-ui-master/bedhunter/src/pages/Home.js';
+  res.sendFile(fileName, options, function (err) {
+      if (err) {
+          next(err);
+      } else {
+          console.log('Sent:', fileName);
+          next();
+      }
+  });
+});
