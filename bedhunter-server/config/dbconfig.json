@@ -1,0 +1,7 @@
+{
+    "host": "localhost:90",
+    "post": 3306,
+    "database": "BedHunterDb",
+    "user": "root",
+    "password": ""
+}

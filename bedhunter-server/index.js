@@ -3,43 +3,76 @@
 // axios, jwt token
 // https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/
 
+/**
+ * The request object is the object received from the client side and contains different kinds of information to be accessed and processed.
+ */
+
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const { v4: uuidv4 } = require('uuid');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const homepage = require('./middleware/homepage')
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res, next) => {
+const addRoutes = require('./routing/routing');
+addRoutes.addRoutes();
+
+/*(req, res, next) => {
   res.status(200).send(`'Hello World!' Hello node! id: ${uuidv4()}`);
+  res.send(middleware.homepage());
 });  
+*/
 
-//<<<<<<<< HEAD:bedhunter-server/index.js
-// environment variable PORT, vagy 5000, ha azon nem fut semmi
-//========
-//>>>>>>>> 95030bfd77b4fb845232bdcf4e43024bc265a812:index.js
+const { initDB } = require('./config/db')
 
-const { initDB } = require('./services/db')
-
-const addRoutes = require('./routing/routing')
 
 app.use(express.static('public'));
 
-initDB(err, (db, myModel) => {
+
+/*initDB(err, (db, myModel) => {
   if(err) {return console.err(`DB error: ${err}`)} 
-  addRoutes(app, db, myModel);
+  //addRoutes(app, db, myModel);
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
-});});
+  });
+});*/
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
-/*
-app.get('express_backend', (req, res) => {
+
+app.get('express_backend', (req, res, next) => {
     res.send({express: 'connected to react'})
-})*/
+})
+console.log(`1 ---- Homepage is: ${homepage}`)
 
+app.get('/', (req, res, next) => {
+  console.log('Homepage called')
+  app.use(homepage)
+})
+
+console.log(`2 ---- Homepage is: ${homepage}`)
+//app.get('/', homepage())
+
+
+
+/*MIDDLEWARE
+app.use('/', function(req, res, next){
+    
+  var options = {
+      
+  };
+   
+  var fileName = 'C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Home.js';
+  res.sendFile(fileName, options, function (err) {
+      if (err) {
+          next(err);
+      } else {
+          console.log('Sent:', fileName);
+          next();
+      }
+  });
+});
+*/
+
+app.listen(port, () => console.log(`Express server currently running on port ${port}`));
