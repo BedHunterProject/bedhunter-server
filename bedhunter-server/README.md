@@ -1,3 +1,6 @@
+# Suükséges Back-End modulok
+path, express, mysql, body-parser, dotenv, jsonwebtoken, uuid, mongoose, nodemon -d
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
