@@ -1,7 +1,7 @@
 {
-    "host": "localhost:90",
-    "post": 3306,
-    "database": "BedHunterDb",
+    "host": "localhost",
+    "port": 3306,
+    "database": "bedhunterdb",
     "user": "root",
     "password": ""
 }

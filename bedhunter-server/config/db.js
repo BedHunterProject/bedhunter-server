@@ -2,14 +2,15 @@
 /** ADATBÁZIS KAPCSOLAT KIÉPÍTÉSE */
 const mongoose = require('mongoose')
 const express = require('express')
+var config = require('./dbconfig.json')
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
-    host: "localhost",
-    post: 3306,
-    database: "BedHunterDb",
-    user: "root",
-    password: ""
+    host: config.host,
+    port: config.port,
+    database: config.database,
+    user: config.user,
+    password: config.password
 })
 
 con.connect((err)=>{

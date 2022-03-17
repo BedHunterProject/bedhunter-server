@@ -9,7 +9,7 @@ module.exports.addRoutes = function(app, database, myModel){
         database,
         uuid
     }
-    
+    console.log('------ Routing is running')
     console.log("app is: " + app);
     
     const homepage = require('../middleware/homepage.js');
