@@ -1,4 +1,6 @@
 module.exports= (objRep) => {
+    console.log('DELETEROOM called');
+
     const { myModel, db } = objRep;
     return (req, res, next) => {
 
@@ -9,6 +11,7 @@ module.exports= (objRep) => {
             if(err){
                 throw err;
             }
+            console.log('DELETEROOM finished');
             return res.json({
                 status: 'DELETE',
                 id: deleteRoom.id,
@@ -17,4 +20,6 @@ module.exports= (objRep) => {
 
         })
     }
+    
+
 }

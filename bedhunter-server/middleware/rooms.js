@@ -1,4 +1,6 @@
 module.exports = (objRep) => {
+    console.log('ROOMS called');
+
     const {myModel} = objRep;
     /*
     console.log('----------------------------------------------------');
@@ -10,6 +12,7 @@ module.exports = (objRep) => {
         const allTodos = myModel.find();
         res.locals.todos = allTodos;
         //res.json(allTodos);
+        console.log('ROOMS finished');
         return next();
     }
     

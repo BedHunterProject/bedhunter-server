@@ -3,6 +3,8 @@ const jwtToken = require("jsonwebtoken");
 const config = process.env;
 
 const verifyJwtToken = (req, res, next) => {
+  console.log('VERIFYJWTTOKEN running');
+
   const myToken =
     req.body.myToken || req.query.myToken || req.headers["x-access-myToken"];
 
@@ -16,6 +18,9 @@ const verifyJwtToken = (req, res, next) => {
     return res.status(401).send({welcomemsg:"Validation error, token is invalid"});
   }
   // return res.status(200).send({user:user});
+  
+  console.log('VERIFYJWTTOKEN done');
+
   return next();
 };
 
