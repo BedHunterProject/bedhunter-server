@@ -1,4 +1,16 @@
-module.exports.rooms = (req, res, next) => {
-    const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Rooms.js')
-    res.sendFile(html)
+module.exports = (objRep) => {
+    const {myModel} = objRep;
+    /*
+    console.log('----------------------------------------------------');
+    console.log(objRep);
+    console.log('----------------------------------------------------');
+    console.log(myModel);
+    */
+    return (req,res, next) => {
+        const allTodos = myModel.find();
+        res.locals.todos = allTodos;
+        //res.json(allTodos);
+        return next();
+    }
+    
 }

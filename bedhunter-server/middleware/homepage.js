@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+module.exports = (req, res, next) => {
+=======
 // https://www.esparkinfo.com/blog/how-to-create-middleware-in-node-js-and-express-js.html
 
 const path = require('path');
@@ -6,6 +9,7 @@ const app = express();
 
 /*
 module.exports.homepage = (req, res, next) => {
+>>>>>>> 28cbc3fbb2e9d08ce03c7f3fe7be06a41d1e0212
     const html = path.join('C:/Users/20g_almasib/bedhunter/bedhunter-ui/bedhunter-ui/src/pages/Home.js')
     res.sendFile(html)
 }
