@@ -22,7 +22,7 @@ module.exports.addRoutes = function(app, database, myModel){
     const deleteRoom = require('../middleware/deleteroom');
     const errorMessage = require('../middleware/errorMessage');
 
-<<<<<<< HEAD
+
 app.get('/', homepage(objectRepo), renderMW(objectRepo, 'index'))
 app.get('/contact', contact(objectRepo))
 app.get('/promotions', promotions(objectRepo))
@@ -48,32 +48,6 @@ const errorPage = require('../middleware/error')
 }
 
 module.exports = addRoutes;
-=======
-    app.get('/my', function (req, res) {
-        console.log("HOMEPAGE CALLED");
-        //const html = path.join()
-        console.log("response object is: " + res);
-        res.send("sdfasdasdasda");
-        console.log(html);
-    });
-    /*app.get('/contact', contact(objectRepo))
-    app.get('/promotions', promotions(objectRepo))
-    app.get('/rooms', rooms(objectRepo))
-    app.get('/rooms/:id', oneRoom(objectRepo))
-    app.post('/search', searching(objectRepo))
-    app.post('/newroom', newRoom(objectRepo))
-    app.delete('/rooms/:id', oneRoom, deleteRoom(objectRepo))*/
-
-    
-
-    /* POST PATCH DELETE KELL MIDDLEWARE-BE!!!!*/
-    
-    //app.get('/*', errorPage(objectRepo))   
-}
-
-//module.exports = addRoutes();
-
->>>>>>> 28cbc3fbb2e9d08ce03c7f3fe7be06a41d1e0212
 
 /*
 
