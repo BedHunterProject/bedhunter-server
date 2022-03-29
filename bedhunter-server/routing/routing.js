@@ -20,10 +20,11 @@ module.exports.addRoutes = function(app, database, myModel){
     const searching = require('../middleware/search');
     const newRoom = require('../middleware/newroom');
     const deleteRoom = require('../middleware/deleteroom');
-    const errorMessage = require('../middleware/errorMessage');
+    const render = require('../middleware/render');
+    const errorMessage = require('../middleware/errormessage');
 
 
-app.get('/', homepage(objectRepo), renderMW(objectRepo, 'index'))
+app.get('/', homepage(objectRepo), render(objectRepo, 'index'))
 app.get('/contact', contact(objectRepo))
 app.get('/promotions', promotions(objectRepo))
 app.get('/rooms', rooms(objectRepo))
@@ -35,7 +36,8 @@ app.delete('/rooms/:id', oneRoom(objectRepo), deleteRoom(objectRepo))
  * POST PATCH DELETE KELL MIDDLEWARE-BE!!!!
  */
 app.get('/*', errorPage(objectRepo))
-
+}
+/*
 const homepage = require('../middleware/homepage');
 const contact = require('../middleware/contact');
 const promotions = require('../middleware/promotions');
@@ -45,9 +47,9 @@ const searching = require('../middleware/search');
 const newRoom = require('../middleware/newroom');
 const deleteRoom = require('../middleware/deleteroom');
 const errorPage = require('../middleware/error')
-}
+}*/
 
-module.exports = addRoutes;
+//module.exports = addRoutes;
 
 /*
 
