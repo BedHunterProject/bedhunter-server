@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const express = require('express');
-
+const session = require('express-session');
 
 module.exports.addRoutes = function(app, database, myModel){
     app = express();
@@ -9,6 +9,7 @@ module.exports.addRoutes = function(app, database, myModel){
         database,
         uuid
     }
+
     console.log('------ Routing is running')
     console.log("app is: " + app);
     
@@ -35,7 +36,7 @@ app.delete('/rooms/:id', oneRoom(objectRepo), deleteRoom(objectRepo))
 /*
  * POST PATCH DELETE KELL MIDDLEWARE-BE!!!!
  */
-app.get('/*', errorPage(objectRepo))
+app.get('/*', errorMessage(objectRepo))
 }
 /*
 const homepage = require('../middleware/homepage');
