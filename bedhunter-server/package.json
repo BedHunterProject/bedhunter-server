@@ -2,17 +2,19 @@
   "name": "bedhunter",
   "version": "1.0.0",
   "description": "bedhunter server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
     "start": "npm run start",
-    "dev": "nodemon index"
+    "dev": "nodemon server"
   },
   "author": "bedhunter",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "connect-loki": "^1.2.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
