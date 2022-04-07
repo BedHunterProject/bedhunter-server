@@ -10,21 +10,47 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-const { v4: uuidv4 } = require('uuid');
+const {
+  v4: uuidv4
+} = require('uuid');
 const bodyParser = require('body-parser');
 const path = require('path');
-const homepage = require('./middleware/homepage')
+const loki = require('lokijs');
+
+const session = require('express-session');
+
+const homepage = require('./middleware/homepage');
 
 app.use(bodyParser.json());
 
-/* session management */
+/** SESSION MANAGEMENT */
+app.use(session({
+  secret: 'test', // sign the cookie
+  resave: false, // for every request we create a new Session
+  saveUninitialized: false // unmodified sessions won't be saved
+}));
+
+app.get('/', (req, res) => {
+  console.log(req.session);
+  res.send("Ide jön majd a homepage ?");
+  console.log(`Homepage session id : ${req.session.id}`);
+});
+
+const db = require('./config/db')
+
+/** AUTHENTICATION */
+
+/* session management 
 app.use(cookieParser());
-app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 app.use(bodyParser.json());      
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views')); 
 
-/* login */
+------ LOGIN
+
+
+*** ITT EBBEN VAN VMI HATALMAS HIBA A KIKOMMENTELT RÉSZBEN ***
+
 
 router.get('/',(req,res) => {
   sess = req.session;
@@ -65,7 +91,7 @@ router.get('/logout',(req,res) => {
 app.use('/', router);
 
 const addRoutes = require('./routing/routing');
-addRoutes.addRoutes();
+addRoutes.addRoutes(); */
 
 /*(req, res, next) => {
   res.status(200).send(`'Hello World!' Hello node! id: ${uuidv4()}`);
@@ -73,7 +99,9 @@ addRoutes.addRoutes();
 });  
 */
 
-const { initDB } = require('./config/db')
+const {
+  initDB
+} = require('./config/db')
 
 
 app.use(express.static('public'));
@@ -89,16 +117,18 @@ app.use(express.static('public'));
 
 
 app.get('express_backend', (req, res, next) => {
-    res.send({express: 'connected to react'})
+  res.send({
+    express: 'connected to react'
+  })
 })
-console.log(`1 ---- Homepage is: ${homepage}`)
+//console.log(`1 ---- Homepage is: ${homepage}`)
 
 app.get('/', (req, res, next) => {
   console.log('Homepage called')
   app.use(homepage)
 })
 
-console.log(`2 ---- Homepage is: ${homepage}`)
+//console.log(`2 ---- Homepage is: ${homepage}`)
 //app.get('/', homepage())
 
 

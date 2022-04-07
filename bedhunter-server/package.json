@@ -17,6 +17,7 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
+    "lokijs": "^1.5.12",
     "mongoose": "^6.2.6",
     "mysql": "^2.18.1",
     "path": "^0.12.7",

@@ -7,6 +7,7 @@ module.exports = (objRep, ejsTemplate) => {
     }
 }
 
+
 /** RENDER?
  * res.locals végig él, érkezik, kell next
  * globális változó? objRepo-ba bemegy (legegyszerűbb), 

@@ -16,6 +16,7 @@ const con = mysql.createConnection({
 con.connect((err)=>{
     console.log("MySQL connected for query!");
 
+    /*
     const myquery = "Select * FROM users"
     var resultQuery = con.query(myquery, (err, result, fields) =>{
         if (err) throw err
@@ -24,5 +25,5 @@ con.connect((err)=>{
             console.log(result)
         })
     })
-    //console.log(resultQuery);
+    //console.log(resultQuery);*/
 })
