@@ -20,6 +20,23 @@ const loki = require('lokijs');
 const session = require('express-session');
 const LokiStore = require('connect-loki')(session);
 
+app.set('view engine', 'ejs')
+app.use(express.static(__dirname + './public'))
+require('./config/lokidb')
+require('./routing/routing');
+
+app.get('/', (req, res)=>{
+  console.log('Homepage called');
+  res.render('index')
+})
+
+app.get('/login', (req, res)=>{
+  console.log('Login page called');
+  res.render('login')
+})
+
+
+// ------------------------------------ SESSION ---------------------------------------
 const options = {
   path: './session-store',
   autosave: true,
@@ -54,22 +71,12 @@ app.use(session({
   saveUninitialized: false // unmodified sessions won't be saved
 }));
 
+/*
 app.get('/', (req, res) => {
   console.log(req.session);
   res.send("Ide jön majd a homepage ?");
   console.log(`Homepage session id : ${req.session.id}`);
 });
-
-
-
-
-/* session management 
-app.use(cookieParser());
-app.use(bodyParser.json());      
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/views')); 
-
------- LOGIN
 
 
 *** ITT EBBEN VAN VMI HATALMAS HIBA A KIKOMMENTELT RÉSZBEN ***

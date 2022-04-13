@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "npm run start",
-    "dev": "nodemon server"
+    "dev": "nodemon index -- ignore db.json"
   },
   "author": "bedhunter",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "body-parser": "^1.19.2",
     "connect-loki": "^1.2.0",
     "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
@@ -27,5 +28,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "keywords": []
 }

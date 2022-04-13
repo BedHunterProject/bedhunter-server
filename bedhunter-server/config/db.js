@@ -2,6 +2,12 @@
 /** ADATBÁZIS KAPCSOLAT KIÉPÍTÉSE */
 require('dotenv').config();
 var config = require('./dbconfig.json')
+var loki = require('lokijs')
+var db = new loki('db.json')
+
+module.exports = db;
+
+/*
 
 const mysql = require('mysql');
 const con = mysql.createConnection({
@@ -18,3 +24,4 @@ con.query(sql, function(err, result) {
     if (err) throw err;
     console.log(result);
 })
+*/
