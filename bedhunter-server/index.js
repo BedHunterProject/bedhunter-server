@@ -25,15 +25,25 @@ app.use(express.static(__dirname + './public'))
 require('./config/lokidb')
 require('./routing/routing');
 
+
 app.get('/', (req, res)=>{
   console.log('Homepage called');
   res.render('index')
 })
 
+// A rooms-hoz tartozó route-ok külön lettek választva a roomsRouter fájlba
+const roomsRouter = require('./routing/roomsRouter')
+app.use('/rooms', roomsRouter)
+
+// a hotelh-hez tartozó route-ok külön lettek választva a hotelsRouter fájlba
+const hotelsRouter = require('./routing/hotelsRouter')
+app.use('/hotels', hotelsRouter)
+
 app.get('/login', (req, res)=>{
   console.log('Login page called');
   res.render('login')
 })
+
 
 
 // ------------------------------------ SESSION ---------------------------------------

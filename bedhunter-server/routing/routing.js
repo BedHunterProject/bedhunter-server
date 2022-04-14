@@ -1,6 +1,7 @@
 const uuid = require('uuid');
 const express = require('express');
 const session = require('express-session');
+const router = express.Router();
 
 module.exports.addRoutes = function(app, database, myModel){
     app = express();
@@ -12,7 +13,24 @@ module.exports.addRoutes = function(app, database, myModel){
 
     console.log('------ Routing is running')
     console.log("app is: " + app);
+
+    router.get('/', (req, res)=>{
+        const homepage_ = require('../bedhunter-ui/src/pages/Home');
+        console.log('Homepage called');
+        res.send(homepage_);
+        res.render('index')
+      })
+      
+      router.get('/login', (req, res)=>{
+        console.log('Login page called');
+        res.render('login')
+      })
+      
+      // itt jelennek meg a hotelek (db HOTEL tábla
+      
     
+    
+      /*
     const homepage = require('../middleware/homepage.js');
     const contact = require('../middleware/contact');
     const promotions = require('../middleware/promotions');

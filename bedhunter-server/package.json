@@ -2,7 +2,7 @@
   "name": "bedhunter",
   "version": "1.0.0",
   "description": "bedhunter server",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "start": "npm run start",
