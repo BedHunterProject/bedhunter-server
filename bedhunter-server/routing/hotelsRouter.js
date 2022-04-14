@@ -13,11 +13,14 @@ const hotelsCollection = db.getCollection("hotels");
 router.get('/', (req, res) => {
     console.log(`/hotels/ was called.`);
     const hotelsQuery = hotelsCollection.find();
-    var hotels = [];
+    var hotelsResponse = [];
     hotelsQuery.forEach(hotel => {
-        hotels.push(hotel.name);
+        var hotelObject = createHotelObject(hotel);
+        hotelsResponse.push(hotelObject);
     });
-    res.send(hotels);
+    res.json({
+        hotels: hotelsResponse
+    });
 })
 
 // ide jön majd egy ŰRLAP ami majd a db Hotels táblájába ad át adatokat, csak az ADMIN látja!!
@@ -31,15 +34,18 @@ router.post('/', (req, res) => {
 })
 
 router.route('/:hotel_id')
-    .get((req, res) => { // egy szobát jelenít meg
+    .get((req, res) => {
         console.log(`Get Hotel called: ${req.params.hotel_id}`);
-        res.send(`Get Hotel ID: ${req.params.hotel_id}`);
+        var hotelQuery = hotelsCollection.findOne({'id': req.params.hotel_id});
+        console.log(`Found hotel is the following: \r\n ${hotelQuery}`);
+        var hotelObject = createHotelObject(hotelQuery)
+        res.send(hotelObject);
     })
-    .put((req, res) => { // egy szobát módosít
+    .put((req, res) => {
         console.log(`Update Hotel called: ${req.params.hotel_id}`);
         res.send(`Update Hotel ID: ${req.params.hotel_id}`);
     })
-    .delete((req, res) => { // egy szobát töröl
+    .delete((req, res) => {
         console.log(`Delete Hotel called: ${req.params.hotel_id}`);
         res.send(`Delete Hotel ID: ${req.params.hotel_id}`);
     })
@@ -49,5 +55,16 @@ router.param('hotel_id', (req, res, next, hotel_id) => {
     console.log(hotel_id);
     next(); // middleware jön
 })
+
+function createHotelObject(hotel) {
+    var hotelObject = {};
+    hotelObject.id = hotel.id;
+    hotelObject.name = hotel.name;
+    hotelObject.address = hotel.address;
+    hotelObject.contact_phone = hotel.contact_phone;
+    hotelObject.contact_email = hotel.contact_email;
+    hotelObject.category_id = hotel.category_id;
+    return hotelObject;
+}
 
 module.exports = router

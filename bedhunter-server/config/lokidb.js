@@ -14,6 +14,7 @@ var adminHashPassword = bcrypt.genSalt(saltRounds, function (err, salt) {
 
 const db = new loki('bedhunter');
 
+console.log("------- CREATING LOKIDB! -------");
 db.addCollection('users').insert([
     {
         id: uuid.v4(),
@@ -44,14 +45,6 @@ db.addCollection('categories').insert([
     { id: 8, category: 'ifjusagi szallo' }])
 
 db.addCollection('hotels').insert([
-    {
-        id: uuid.v4(),
-        name: 'Hotel Dzsungel',
-        address: '4431 Nyíregyháza, Blaha Lujza sétány 41',
-        contact_phone: '+36 (42) 479 710',
-        contact_email: 'szallas@hoteldzsungel.hu',
-        category_id: 1
-    },
     {
         id: uuid.v4(),
         name: 'Hotel Dzsungel',
