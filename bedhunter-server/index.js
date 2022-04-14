@@ -20,6 +20,7 @@ const loki = require('lokijs');
 const session = require('express-session');
 const LokiStore = require('connect-loki')(session);
 
+app.use(logger);
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + './public'))
 require('./config/lokidb')
@@ -44,7 +45,10 @@ app.get('/login', (req, res)=>{
   res.render('login')
 })
 
-
+function logger(req, res, next){
+  console.log(req.originalUrl);
+  next();
+}
 
 // ------------------------------------ SESSION ---------------------------------------
 const options = {
@@ -138,11 +142,6 @@ addRoutes.addRoutes(); */
   res.send(middleware.homepage());
 });  
 */
-
-const {
-  initDB
-} = require('./config/db')
-
 
 app.use(express.static('public'));
 
