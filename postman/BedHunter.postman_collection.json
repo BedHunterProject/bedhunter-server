@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "0cc3d0e4-4412-4d7a-83f6-9620adf52793",
+		"name": "BedHunter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Hotels",
+			"item": [
+				{
+					"name": "localhost:5000/hotels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/hotels",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"hotels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:5000/hotels/hotel_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/hotels/hotel_id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"hotels",
+								"hotel_id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:5000/hotels/hotel_id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hotel Dzsungel Mungel\",\n    \"address\": \"4431 Nyíregyháza, Blaha Lujza sétány 41\",\n    \"contact_phone\": \"+36 (42) 479 710\",\n    \"contact_email\": \"szallas@hoteldzsungel.hu\",\n    \"category_id\": 1\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/hotels/{{hotel_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"hotels",
+								"{{hotel_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:5000/hotels/hotel_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/hotels/hotel_id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"hotels",
+								"hotel_id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:5000/hotels/new",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hotel Geri\",\n    \"address\": \"4531 Nyírpazony\",\n    \"contact_phone\": \"+36 (30) 642 2313\",\n    \"contact_email\": \"greg@remenyi.hu\",\n    \"category_id\": 2\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/hotels/new",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"hotels",
+								"new"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "/rooms/room_id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"hotel_id\": 1,\r\n        \"room_number\": 10,\r\n        \"beds_number\": 2,\r\n        \"date_start\": \"2022-04-15\",\r\n        \"date_end\": \"2022-04-17\",\r\n        \"price\": 12500\r\n    }"
+						},
+						"url": {
+							"raw": "localhost:5000/rooms/{{room_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"rooms",
+								"{{room_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/rooms/",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/rooms/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"rooms",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/rooms/new",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"hotel_id\": \"7d017a03-6af7-4d2a-8d24-cd5f00492335\",\n    \"room_number\": 11,\n    \"beds_number\": 1,\n    \"date_start\": \"2022-04-11\",\n    \"date_end\": \"2022-04-11\",\n    \"price\": 12500\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/rooms/new",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"rooms",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/rooms/room_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "/users/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/user_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/user_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/users/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"greg@remenyi.com\",\r\n    \"password\": \"narancs2\",\r\n    \"name\": \"Gergő Reményi\",\r\n    \"birthdate\": \"1990-6-4\",\r\n    \"phone\": \"-\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"greg@remenyi.com\",\r\n    \"password\": \"narancs2\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

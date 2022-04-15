@@ -37,7 +37,6 @@ router.route('/:hotel_id')
     .get((req, res) => {
         console.log(`Get Hotel called: ${req.params.hotel_id}`);
         var hotelQuery = hotelsCollection.findOne({ 'id': req.params.hotel_id });
-        console.log(`Found hotel is the following: \r\n ${hotelQuery}`);
         var hotelObject = createHotelObject(hotelQuery)
         res.send(hotelObject);
     })
@@ -45,8 +44,7 @@ router.route('/:hotel_id')
         if (enableConsoleLogging) PrintOutHotel(req.body, req.params.hotel_id);
 
         var hotelDoc = hotelsCollection.findOne({ 'id': req.params.hotel_id });
-        console.log("Printing out hotel...");
-        PrintOutHotel(hotelDoc);
+        if (enableConsoleLogging) PrintOutHotel(hotelDoc);
 
         if (hotelDoc.id === undefined) {
             throw new Error("Hotel not found in Db");
