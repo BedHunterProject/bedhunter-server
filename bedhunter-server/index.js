@@ -10,9 +10,7 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
-const {
-  v4: uuidv4
-} = require('uuid');
+const uuid = require('uuid');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -35,13 +33,14 @@ app.get('/', (req, res)=>{
   res.render('index')
 })
 
-// A rooms-hoz tartozó route-ok külön lettek választva a roomsRouter fájlba
 const roomsRouter = require('./routing/roomsRouter')
 app.use('/rooms', roomsRouter)
 
-// a hotelh-hez tartozó route-ok külön lettek választva a hotelsRouter fájlba
 const hotelsRouter = require('./routing/hotelsRouter')
 app.use('/hotels', hotelsRouter)
+
+const usersRouter = require('./routing/usersRouter')
+app.use('/users', usersRouter)
 
 app.get('/login', (req, res)=>{
   console.log('Login page called');
@@ -76,8 +75,6 @@ app.use(session({
     store: new LokiStore(options),
     secret: 'keyboard cat'
 }));
-
-const homepage = require('./middleware/homepage');
 
 app.use(bodyParser.json());
 

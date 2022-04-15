@@ -86,8 +86,8 @@ db.addCollection('rooms').insert([
         hotel_id: 1,
         room_number: 20,
         beds_number: 2,
-        date_start: 2022-04-15, //format shuold be considered here
-        date_end: 2022-04-17, //format shuold be considered here
+        date_start: "2022-04-15", //format shuold be considered here
+        date_end: "2022-04-17", //format shuold be considered here
         price: 12500
     },
     {
@@ -95,8 +95,8 @@ db.addCollection('rooms').insert([
         hotel_id: 1,
         room_number: 51,
         beds_number: 4,
-        date_start: 2022-04-22, //format shuold be considered here
-        date_end: 2022-04-24, //format shuold be considered here
+        date_start: "2022-04-22", //format shuold be considered here
+        date_end: "2022-04-24", //format shuold be considered here
         price: 35000
     },
     {
@@ -104,8 +104,8 @@ db.addCollection('rooms').insert([
         hotel_id: 3,
         room_number: 5,
         beds_number: 2,
-        date_start: 2022-04-23, //format shuold be considered here
-        date_end: 2022-04-24, //format shuold be considered here
+        date_start: "2022-04-23", //format shuold be considered here
+        date_end: "2022-04-24", //format shuold be considered here
         price: 22500
     },
 ]);

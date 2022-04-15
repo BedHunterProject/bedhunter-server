@@ -36,7 +36,7 @@ router.post('/new', (req, res) => {
 router.route('/:hotel_id')
     .get((req, res) => {
         console.log(`Get Hotel called: ${req.params.hotel_id}`);
-        var hotelQuery = hotelsCollection.findOne({'id': req.params.hotel_id});
+        var hotelQuery = hotelsCollection.findOne({ 'id': req.params.hotel_id });
         console.log(`Found hotel is the following: \r\n ${hotelQuery}`);
         var hotelObject = createHotelObject(hotelQuery)
         res.send(hotelObject);
@@ -44,7 +44,7 @@ router.route('/:hotel_id')
     .patch((req, res) => {
         if (enableConsoleLogging) PrintOutHotel(req.body, req.params.hotel_id);
 
-        var hotelDoc = hotelsCollection.findOne({'id': req.params.hotel_id});
+        var hotelDoc = hotelsCollection.findOne({ 'id': req.params.hotel_id });
         console.log("Printing out hotel...");
         PrintOutHotel(hotelDoc);
 
@@ -61,12 +61,12 @@ router.route('/:hotel_id')
         } catch (err) {
             console.log(err);
         }
-        
+
         res.status(204).send();
     })
     .delete((req, res) => {
         console.log(`Delete Hotel called: ${req.params.hotel_id}`);
-        hotelsCollection.findAndRemove({'id':req.params.hotel_id});
+        hotelsCollection.findAndRemove({ 'id': req.params.hotel_id });
         console.log(`Delete Hotel finished`);
         res.status(204).send();
     })
