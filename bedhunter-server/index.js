@@ -14,6 +14,9 @@ const {
   v4: uuidv4
 } = require('uuid');
 const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const path = require('path');
 const loki = require('lokijs');
 

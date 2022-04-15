@@ -1,6 +1,7 @@
 // DOCUMENTATIONS
 // PLEASE READ BEFORE USAGE
 //   https://lokijs-forge.github.io/LokiDB/api/classes/collection.html
+//   https://github.com/techfort/LokiJS/tree/master/examples
 
 const loki = require('lokijs');
 const uuid = require('uuid');
