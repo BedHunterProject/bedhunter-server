@@ -7,7 +7,7 @@ const uuid = require('uuid');
 
 //session management
 const cookieParser = require("cookie-parser");
-const session = require('express-session');
+const sessions = require('express-session');
 app.use(cookieParser());
 
 // middlewares
@@ -15,37 +15,29 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.json())
 
-/** SESSION MANAGEMENT */
-app.use(session({
-    secret: 'testing the session', // sign the session id cookie
-    resave: false, // for every request we create a new Session
-    saveUninitialized: false, // unmodified sessions won't be saved
-    cookie: {maxAge: 1000 * 30}
-  }));
-
 //db
 const usersCollection = db.getCollection("users");
 
+var session;
 router.post('/', (req, res) => {
 
     var user = usersCollection.findOne({ 'email': req.body.email });
 
-    var session;
+    if (user == null || typeof user !== 'object') {
+        res.status(404); res.json({ "Error": "User not found" }); throw new Error("User not found.");
+    } 
+   
     if (req.body.email === user.email && req.body.password === user.password) {
         session = req.session;
-        //session.userid = user.name;
-        console.log(`Logged in successfully. SessionID: ${req.session}`)
-        res.json(session.cookie.expires);
+        session.userid = user.id;
+        console.log(`Logged in successfully. `)
+        res.json(session);
+        res.status(200);
+        res.end();
     }
     else {
         res.send('Invalid username or password');
     }
-
-    //login granted
-    //send back random session ID for cookie
-    //save sessionId with expiry in DB
-
-    
 })
 
 app.get('/logout',(req,res) => {

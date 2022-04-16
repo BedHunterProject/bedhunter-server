@@ -15,8 +15,12 @@ router.post('/', (req, res) => {
     var user = createuserObject(req.body)
     user.id = uuid.v4();
     usersCollection.insertOne(user);
+    console.log("Registrated successfully.");
     db.saveDatabase();
+    
     res.json(user);
+    res.status(200);
+    res.end();
 })
 
 function createuserObject(user){

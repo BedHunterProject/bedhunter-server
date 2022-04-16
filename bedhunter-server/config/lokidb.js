@@ -8,10 +8,7 @@ const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 8;
 
-// ---------- admin jelszó hash, így kell majd a töbit is
-var adminHashPassword = bcrypt.genSalt(saltRounds, function (err, salt) {
-    return bcrypt.hash("admin_vagyok", salt)
-})
+
 
 const db = new loki('bedhunter');
 
@@ -19,21 +16,30 @@ console.log("------- CREATING LOKIDB! -------");
 db.addCollection('users').insert([
     {
         id: uuid.v4(),
+        email: "bogialmasi@gmail.com",
+        password: "mypass", // hashPW needed
+        name: "Almási Bogi",
+        birthdate: "2000-04-24",
+        phone: '-',
+    }
+]);
+
+var adminHashPassword = bcrypt.genSalt(saltRounds, function (err, salt) {
+    return bcrypt.hash("admin_vagyok", salt)
+})
+
+db.addCollection('admin').insert([
+    {
+        id: uuid.v4(),
         email: 'admin@admin.hu',
         password: adminHashPassword,
         name: 'ADMIN',
         birthdate: '2022-02-22',
         phone: '-'
-    },
-    {
-        id: uuid.v4(),
-        email: "bogialmasi@gmail.com",
-        password: "mypass",
-        name: "Almási Bogi",
-        birthdate: "2000-04-24",
-        phone: '-'
     }
-]);
+])
+
+db.addCollection('reservations');
 
 db.addCollection('categories').insert([
     { id: 1, category: 'hotel' },
@@ -109,6 +115,7 @@ db.addCollection('rooms').insert([
         price: 22500
     },
 ]);
+
 
 db.saveDatabase();
 

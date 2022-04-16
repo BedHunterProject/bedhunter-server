@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     const usersQuery = usersCollection.find();
     var usersResponse = [];
     usersQuery.forEach(user => {
-        var userObject = createuserObject(user);
+        var userObject = createUserObject(user);
         usersResponse.push(userObject);
     })
     res.json({
@@ -25,8 +25,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    var user = createuserObject(req.body)
+    var user = createUserObject(req.body)
     user.id = uuid.v4();
+    // hashPW needed
     usersCollection.insertOne(user);
     db.saveDatabase();
     res.json(user);
@@ -36,11 +37,11 @@ router.route('/:user_id')
     .get((req, res) => {
         console.log(`Get User: ${req.params.user_id}`)
         var userQuery = usersCollection.findOne({"id": req.params.user_id});
-        var userObject = createuserObject(userQuery);
+        var userObject = createUserObject(userQuery);
         res.send(userObject);
     })
     .patch((req, res) => {
-        if (enableConsoleLogging) PrintOutuser(req.body, req.params.user_id);
+        if (enableConsoleLogging) PrintOutUser(req.body, req.params.user_id);
         try {
             console.log(`Updating user with ID: ${req.params.user_id}`);
             usersCollection.findAndUpdate({'id': req.params.user_id }, (userObject) => {
@@ -66,7 +67,7 @@ router.route('/:user_id')
     })
 
 
-function createuserObject(user){
+function createUserObject(user){
     var userObject = {};
     userObject.id = user.id;
     userObject.email = user.email;
@@ -75,6 +76,19 @@ function createuserObject(user){
     userObject.birthdate = user.birthdate;
     userObject.phone = user.phone;
     return userObject;
+}
+
+function PrintOutUser(user, id) {
+    if (user.id === undefined && id != undefined) {
+        console.log(id)
+    } else {
+        console.log(user.id);
+    }
+    console.log(user.name);
+    console.log(user.address);
+    console.log(user.contact_phone);
+    console.log(user.contact_email);
+    console.log(user.category_id);
 }
 
 module.exports = router

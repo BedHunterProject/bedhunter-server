@@ -10,15 +10,17 @@
 // using block
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
+
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const LokiStore = require('connect-loki')(session);
+const config = require('./config/serviceConfig');
+
 require('./config/lokidb')
 require('./routing/routing');
 require('uuid');
 require('path');
 require('lokijs');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -29,10 +31,11 @@ app.use(express.static(__dirname + './public'));
 
 //session includes
 app.use(session({
-  secret: 'testing the session', // sign the session id cookie
-  resave: false, // for every request we create a new Session
-  saveUninitialized: false, // unmodified sessions won't be saved
-  cookie: { maxAge: 1000 * 30 }
+  secret: 'abcdefghijklmnopqrstuvxyz', // sign the session id cookie
+  resave: true, // for every request we create a new Session
+  saveUninitialized: true, // unmodified sessions won't be saved
+  cookie: { maxAge: config.cookieMaxAgeInSeconds * 1000 },
+  rolling: true
 }));
 
 //middleware
@@ -59,6 +62,12 @@ app.use('/login', loginRouter);
 
 const registerRouter = require('./routing/registerRouter');
 app.use('/register', registerRouter);
+
+const logoutRouter = require('./routing/logoutRouter');
+app.use('/logout', logoutRouter)
+
+const reservationRouter = require('./routing/reservationRouter');
+app.use('/reservation', reservationRouter)
 
 
 function logger(req, res, next) {
@@ -107,4 +116,5 @@ router.get('/logout',(req,res) => {
 app.use('/', router);
 */
 
-app.listen(port, () => console.log(`Express server currently running on port ${port}`));
+const port = process.env.PORT || config.port;
+app.listen(port, () => console.log(`Express server currently running on port ${config.port}`));

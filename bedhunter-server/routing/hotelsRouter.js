@@ -4,47 +4,51 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('../config/lokidb');
 const uuid = require('uuid');
+const config = require('../config/serviceConfig.json')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 
 const hotelsCollection = db.getCollection("hotels");
-const enableConsoleLogging = false;
 
 // itt jelennek meg a hotelek által fladott hírdetések (db Hotels tábla)
 router.get('/', (req, res) => {
-    console.log(`/hotels/ was called.`);
     const hotelsQuery = hotelsCollection.find();
     var hotelsResponse = [];
     hotelsQuery.forEach(hotel => {
         var hotelObject = createHotelObject(hotel);
         hotelsResponse.push(hotelObject);
     });
+    res.status(200);
     res.json({
         hotels: hotelsResponse
     });
+    res.end();
 })
 
 router.post('/new', (req, res) => {
     var hotel = createHotelObject(req.body);
     hotel.id = uuid.v4();
     hotelsCollection.insertOne(hotel);
+    res.status(200);
     res.json(hotel);
+    res.end();
 })
 
 router.route('/:hotel_id')
     .get((req, res) => {
-        console.log(`Get Hotel called: ${req.params.hotel_id}`);
         var hotelQuery = hotelsCollection.findOne({ 'id': req.params.hotel_id });
         var hotelObject = createHotelObject(hotelQuery)
         res.send(hotelObject);
+        res.status(200);
+        res.end();
     })
     .patch((req, res) => {
-        if (enableConsoleLogging) PrintOutHotel(req.body, req.params.hotel_id);
+        if (config.enableConsoleLogging) PrintOutHotel(req.body, req.params.hotel_id);
 
         var hotelDoc = hotelsCollection.findOne({ 'id': req.params.hotel_id });
-        if (enableConsoleLogging) PrintOutHotel(hotelDoc);
+        if (config.enableConsoleLogging) PrintOutHotel(hotelDoc);
 
         if (hotelDoc.id === undefined) {
             throw new Error("Hotel not found in Db");
@@ -53,7 +57,6 @@ router.route('/:hotel_id')
         hotelDoc = getHotelFromRequestBody(req, hotelDoc); //updating the hotel from db
 
         try {
-            console.log(`Updating hotel with: ${req.params.hotel_id}`);
             hotelsCollection.update(hotelDoc);
             db.saveDatabase();
         } catch (err) {
@@ -63,10 +66,11 @@ router.route('/:hotel_id')
         res.status(204).send();
     })
     .delete((req, res) => {
-        console.log(`Delete Hotel called: ${req.params.hotel_id}`);
         hotelsCollection.findAndRemove({ 'id': req.params.hotel_id });
         console.log(`Delete Hotel finished`);
-        res.status(204).send();
+        res.status(204);
+        res.status(200);
+        res.end();
     })
 
 
