@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const db = require('../config/lokidb');
 const uuid = require('uuid');
 const config = require('../config/serviceConfig.json')
+const logger = require('node-color-log');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
         var hotelObject = createHotelObject(hotel);
         hotelsResponse.push(hotelObject);
     });
+    logger.color('red').log('hotels returning');
     res.status(200);
     res.json({
         hotels: hotelsResponse

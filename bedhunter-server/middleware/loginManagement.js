@@ -34,8 +34,8 @@ function CheckIfUserLoggedIn(req, res, next) {
             req.session.destroy();
         }
         
-        //return res.send({"ErrorMessage": "You are unauthorized to access this page.", "ErrorCode":"4001"});
-        return res.redirect("http://localhost:5000/login");
+        return res.send({"ErrorMessage": "You are unauthorized to access this page.", "ErrorCode":"4001"});
+        // return res.redirect("http://localhost:5000/login");
     }
 }
 

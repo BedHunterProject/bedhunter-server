@@ -342,7 +342,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"greg@remenyi.com\",\r\n    \"password\": \"narancs2\",\r\n    \"name\": \"Gergő Reményi\",\r\n    \"birthdate\": \"1990-6-4\",\r\n    \"phone\": \"-\"\r\n}"
+							"raw": "{\r\n    \"email\": \"greg@remenyi.com\",\r\n    \"password\": \"narancs2\",\r\n    \"name\": \"gremenyi\",\r\n    \"birthdate\": \"1990-6-4\",\r\n    \"phone\": \"-\"\r\n}"
 						},
 						"url": {
 							"raw": "localhost:5000/register",
@@ -364,6 +364,67 @@
 			"item": [
 				{
 					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"greg@remenyi.com\",\r\n    \"password\": \"narancs2\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation",
+			"item": [
+				{
+					"name": "/reservation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/reservation",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logout",
+			"item": [
+				{
+					"name": "logout",
 					"request": {
 						"method": "POST",
 						"header": [

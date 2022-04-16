@@ -8,10 +8,13 @@ require('express-session');
 
 router.post('/', (req, res) => {
     if (config.enableSessionDataLogging) logger.color("yellow").log("Destroying session data.")
-    req.session.destroy();
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(400).send('Unable to log out')}
+    });
 
     console.log(req.session);
-    res.status(204);
+    return res.status(204).end();
 })
 
 module.exports = router;
