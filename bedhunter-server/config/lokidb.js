@@ -13,6 +13,8 @@ const db = new loki('bedhunter');
 var adminId = uuid.v4();
 
 console.log("------- CREATING LOKIDB! -------");
+
+var adminHashPassword = bcrypt.hashSync("adminvagyok", saltRounds);
 db.addCollection('users').insert([
     {
         id: uuid.v4(),
@@ -32,9 +34,12 @@ db.addCollection('users').insert([
     }
 ]);
 
-var adminHashPassword = bcrypt.genSalt(saltRounds, function (err, salt) {
-    return bcrypt.hash("admin_vagyok", salt)
-})
+
+
+db.addCollection("admins").insert([
+    { userId: adminId}
+]);
+
 
 db.addCollection('reservations');
 
