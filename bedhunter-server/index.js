@@ -11,6 +11,7 @@
 const express = require('express');
 const app = express();
 
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const config = require('./config/serviceConfig');
@@ -21,15 +22,26 @@ require('uuid');
 require('path');
 require('lokijs');
 
-
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(bodyParser.json());
 
+// https://www.codegrepper.com/code-examples/javascript/access-control-allow-origin+nodeJs
+// https://web.dev/cross-origin-resource-sharing/
+app.use(cors(corsOptions));
 app.use(logger);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + './public'));
+
+// allows the front end to access the server side
+var corsOptions = { origin: "http://localhost:3000/"}
+// enable cors for all resources
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 //session includes
 app.use(session({
