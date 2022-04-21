@@ -5,7 +5,7 @@ const config = require('../config/serviceConfig.json')
 
 require('express-session');
 
-
+// logging out, used in loginRouter
 router.post('/', (req, res) => {
     if (config.enableSessionDataLogging) logger.color("yellow").log("Destroying session data.")
     req.session.destroy((err) => {

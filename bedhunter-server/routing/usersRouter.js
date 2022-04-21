@@ -1,3 +1,5 @@
+// creates new userObjects as register
+
 const express = require('express')
 const router = express.Router()
 const app = express();
@@ -12,6 +14,7 @@ app.use(express.json());
 const usersCollection = db.getCollection("users");
 const enableConsoleLogging = false;
 
+// show all users, only the admin can see this
 router.get('/', (req, res) => {
     const usersQuery = usersCollection.find();
     var usersResponse = [];
@@ -34,12 +37,14 @@ router.post('/register', (req, res) => {
 })
 
 router.route('/:user_id')
+    // shows one user
     .get((req, res) => {
         console.log(`Get User: ${req.params.user_id}`)
         var userQuery = usersCollection.findOne({"id": req.params.user_id});
         var userObject = createUserObject(userQuery);
         res.send(userObject);
     })
+    // updates one user
     .patch((req, res) => {
         if (enableConsoleLogging) PrintOutUser(req.body, req.params.user_id);
         try {
@@ -59,8 +64,9 @@ router.route('/:user_id')
 
         res.status(204).send();
     })
+    // deletes one user
     .delete((req, res) => {
-        console.log(`Delete User called: ${req.params.user_id}`);
+        console.log(`Delete User with id: ${req.params.user_id}`);
         usersCollection.findAndRemove({ 'id': req.params.user_id });
         db.saveDatabase();
         res.status(204).send();

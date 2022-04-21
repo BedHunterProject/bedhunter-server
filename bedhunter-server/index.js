@@ -22,7 +22,9 @@ require('path');
 require('lokijs');
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 app.use(logger);
@@ -34,7 +36,9 @@ app.use(session({
   secret: 'abcdefghijklmnopqrstuvxyz', // sign the session id cookie
   resave: true, // for every request we create a new Session
   saveUninitialized: true, // unmodified sessions won't be saved
-  cookie: { maxAge: config.cookieMaxAgeInSeconds * 1000 },
+  cookie: {
+    maxAge: config.cookieMaxAgeInSeconds * 1000
+  },
   rolling: true
 }));
 
@@ -69,12 +73,17 @@ app.use('/logout', logoutRouter)
 const reservationRouter = require('./routing/reservationRouter');
 app.use('/reservation', reservationRouter)
 
+/* HOW TO USE
+registration and login needed before accessing any page
+users that aren't admins cannot access the /users route
+TODO - find a solution for forbiddenRoutes, not let users do anything but GET methods, 
+***EXCEPT*** POST in /login, /register, /reservations, and DELETE in /reservations
+*/
 
 function logger(req, res, next) {
   console.log(req.originalUrl);
   next();
 }
-
 
 const port = process.env.PORT || config.port;
 app.listen(port, () => console.log(`Express server currently running on port ${config.port}`));

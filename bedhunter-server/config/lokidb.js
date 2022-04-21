@@ -3,10 +3,17 @@
 //   https://lokijs-forge.github.io/LokiDB/api/classes/collection.html
 //   https://github.com/techfort/LokiJS/tree/master/examples
 
+// database connection
+// database is created when the app starts,
+// new id is created every time the app starts/restarts, working with id's should be handled accordingly
+// new users receive hash passwords
+
+// TOTO ----------------------------------------------------------------
+// validations, regex(when posting a new Object from the routers)
+
 const loki = require('lokijs');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
-const saltRounds = 8;
 
 const db = new loki('bedhunter');
 
@@ -14,12 +21,15 @@ var adminId = uuid.v4();
 
 console.log("------- CREATING LOKIDB! -------");
 
-var adminHashPassword = bcrypt.hashSync("adminvagyok", saltRounds);
+// creating password hash for the users already in the database
+const saltRounds = 8;
+function hashPassword(password){ bcrypt.hashSync(password, saltRounds);}
+
 db.addCollection('users').insert([
     {
         id: uuid.v4(),
         email: "bogialmasi@gmail.com",
-        password: "mypass", // hashPW needed
+        password: hashPassword("Bogi", saltRounds),
         name: "Almási Bogi",
         birthdate: "2000-04-24",
         phone: '-',
@@ -27,7 +37,7 @@ db.addCollection('users').insert([
     {
         id: adminId,
         email: 'admin@admin.hu',
-        password: adminHashPassword,
+        password: hashPassword("Admin", saltRounds),
         name: 'ADMIN',
         birthdate: '2022-02-22',
         phone: '-'
@@ -35,13 +45,12 @@ db.addCollection('users').insert([
 ]);
 
 
-
 db.addCollection("admins").insert([
     { userId: adminId}
 ]);
 
 
-db.addCollection('reservations');
+db.addCollection('reservations'); // will be filled by the user
 
 db.addCollection('categories').insert([
     { id: 1, category: 'hotel' },

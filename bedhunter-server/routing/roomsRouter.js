@@ -1,3 +1,5 @@
+// handles rooms
+
 const express = require('express')
 const router = express.Router()
 const app = express();
@@ -6,7 +8,9 @@ const db = require('../config/lokidb');
 const uuid = require('uuid');
 
 // middlewares
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 app.use(bodyParser.json())
 app.use(express.json())
 
@@ -14,6 +18,7 @@ app.use(express.json())
 const roomsCollection = db.getCollection("rooms");
 const enableConsoleLogging = false;
 
+// show all rooms
 router.get('/', (req, res) => {
     const roomsQuery = roomsCollection.find(); // all rooms
     var roomsResponse = [];
@@ -26,6 +31,7 @@ router.get('/', (req, res) => {
     });
 })
 
+// created new room object
 router.post('/new', (req, res) => {
     var room = createRoomObject(req.body);
     room.id = uuid.v4();
@@ -33,20 +39,25 @@ router.post('/new', (req, res) => {
     res.json(room);
 })
 
-
 router.route('/:room_id')
+    // show one room
     .get((req, res) => {
         console.log(`Get Room: ${req.params.room_id}`);
-        var roomQuery = roomsCollection.findOne({ 'id': req.params.room_id });
+        var roomQuery = roomsCollection.findOne({
+            'id': req.params.room_id
+        });
         console.log(`Found room is the following: \r\n ${roomQuery}`);
         var roomObject = createRoomObject(roomQuery);
         res.send(roomObject);
     })
+    // update one room by uuid id
     .patch((req, res) => {
         if (enableConsoleLogging) PrintOutRoom(req.body, req.params.room_id);
         try {
             console.log(`Updating room with ID: ${req.params.room_id}`);
-            roomsCollection.findAndUpdate({'id': req.params.room_id }, (roomObject) => {
+            roomsCollection.findAndUpdate({
+                'id': req.params.room_id
+            }, (roomObject) => {
                 roomObject.id = uuid.v4();
                 roomObject.hotel_id = roomObject.hotel_id;
                 roomObject.room_number = req.body.room_number;
@@ -62,9 +73,12 @@ router.route('/:room_id')
 
         res.status(204).send();
     })
-    .delete((req, res) => { // egy szobát töröl
+    // deletes one room
+    .delete((req, res) => { 
         console.log(`Delete Room: ${req.params.room_id}`);
-        roomsCollection.findAndRemove({ 'id': req.params.room_id });
+        roomsCollection.findAndRemove({
+            'id': req.params.room_id
+        });
         res.status(204).send();
     })
 

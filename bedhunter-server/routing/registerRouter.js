@@ -1,3 +1,5 @@
+// creates new userObjects that can then be used to login
+
 const express = require('express')
 const router = express.Router()
 const app = express();
@@ -12,6 +14,7 @@ app.use(express.json());
 
 const usersCollection = db.getCollection("users");
 
+// creates password hash
 function hashPassword(password) {
     const saltRounds = 8;
     hash = bcrypt.hashSync(password, saltRounds);
@@ -21,11 +24,11 @@ function hashPassword(password) {
 
 router.post('/', (req, res) => {
     var user = createUserObject(req.body)
-    //validateRegistration(user)
     var isUserRegistered = isAlreadyRegistered(req.body, res)
     if( isUserRegistered ) {
         return res.status(409).json({ "Error": "Already registered" }).end(); // Conflict
     }
+    // creates uuid and password hash
     user.id = uuid.v4();
     user.password = hashPassword(req.body.password);
     usersCollection.insertOne(user);
@@ -37,7 +40,7 @@ router.post('/', (req, res) => {
     res.end();
 })
 
-
+// if the user is already registered, it sends true
 function isAlreadyRegistered(reqBody, res) {
     var searchedUser = usersCollection.findOne({ "email": reqBody.email })
     if (searchedUser != null) {
@@ -47,8 +50,7 @@ function isAlreadyRegistered(reqBody, res) {
 }
 
 
-
-
+// creates a new user object
 function createUserObject(user) {
     var userObject = {};
     userObject.id = user.id;
