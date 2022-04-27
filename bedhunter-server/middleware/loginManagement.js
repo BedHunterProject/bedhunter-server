@@ -4,7 +4,7 @@ const db = require('../config/lokidb');
 const moment = require('moment');
 const logger = require('node-color-log'); //https://github.com/tigercosmos/node-color-log
 const config = require('../config/serviceConfig.json');
-const forbiddenRoutes = require('../data/forbiddenRoutes.json');
+//const forbiddenRoutes = require('../data/forbiddenRoutes.json');
 app.use(express.json());
 
 
@@ -24,12 +24,12 @@ function checkIfUserLoggedIn(req, res, next) {
         var diff = cookieExpires - now;
 
         if (config.enableSessionDataLogging) logSessionData(cookieExpires, now, diff);
-        var isUnauthorized = manageAdmins(req, res, next);
+        /*var isUnauthorized = manageAdmins(req, res, next);  //disabled for the time being. ForbiddenRoutes was deleted, and it should be solved in another way.
         console.log("isUnauthorized:"+ isUnauthorized);
         if (isUnauthorized) {
             console.log("unauthorized page for the user. 409");
             return res.send({ "ErrorMessage": "You are unauthorized to access this page.", "ErrorCode": "4001" });
-        }
+        }*/
 
         next();
     } else {
@@ -41,6 +41,7 @@ function checkIfUserLoggedIn(req, res, next) {
             req.session.destroy();
         }
 
+        next(); //TODO this is only for demo purposes. It should not be here! 
         return res.send({ "ErrorMessage": "You are unauthorized to access this page.", "ErrorCode": "4001" });
         // return res.redirect("http://localhost:5000/login");
     }
