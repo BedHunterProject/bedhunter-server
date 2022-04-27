@@ -23,13 +23,15 @@ console.log("------- CREATING LOKIDB! -------");
 
 // creating password hash for the users already in the database
 const saltRounds = 8;
-function hashPassword(password){ bcrypt.hashSync(password, saltRounds);}
+function hashPassword(password) {
+    return bcrypt.hashSync(password, saltRounds);
+}
 
 db.addCollection('users').insert([
     {
         id: uuid.v4(),
         email: "bogialmasi@gmail.com",
-        password: hashPassword("Bogi", saltRounds),
+        password: hashPassword("Bogi"),
         name: "Almási Bogi",
         birthdate: "2000-04-24",
         phone: '-',
@@ -37,7 +39,7 @@ db.addCollection('users').insert([
     {
         id: adminId,
         email: 'admin@admin.hu',
-        password: hashPassword("Admin", saltRounds),
+        password: hashPassword("Admin"),
         name: 'ADMIN',
         birthdate: '2022-02-22',
         phone: '-'
@@ -46,7 +48,7 @@ db.addCollection('users').insert([
 
 
 db.addCollection("admins").insert([
-    { userId: adminId}
+    { userId: adminId }
 ]);
 
 

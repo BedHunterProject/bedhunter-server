@@ -1,7 +1,8 @@
 {
     "port" : 5000,
-    "cookieMaxAgeInSeconds" : 30,
+    "cookieMaxAgeInSeconds" : 300,
     "enableSessionDataLogging" : false,
-    "enableConsoleLogging" : true
+    "enableConsoleLogging" : true,
+    "isAdminEnabled": true
 }
 

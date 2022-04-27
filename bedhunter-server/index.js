@@ -29,19 +29,19 @@ app.use(bodyParser.json());
 
 // https://www.codegrepper.com/code-examples/javascript/access-control-allow-origin+nodeJs
 // https://web.dev/cross-origin-resource-sharing/
-app.use(cors(corsOptions));
+
 app.use(logger);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + './public'));
 
-// allows the front end to access the server side
-var corsOptions = { origin: "http://localhost:3000/"}
 // enable cors for all resources
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+const corsOptions = {
+  origin: true,
+  methods: ['GET, POST'],
+  credentials: true
+};
+
+app.use(cors(corsOptions))
 
 //session includes
 app.use(session({

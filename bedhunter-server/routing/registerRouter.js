@@ -7,6 +7,24 @@ const bodyParser = require('body-parser')
 const db = require('../config/lokidb');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
+
+//var corsOptions = { origin: "http://localhost:3000/"}
+const corsOptions = {
+    origin: true,
+    methods: ['GET, POST'],
+    credentials: true
+  };
+
+app.use(cors(corsOptions))
+
+// enable cors for all resources
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -18,7 +36,7 @@ const usersCollection = db.getCollection("users");
 function hashPassword(password) {
     const saltRounds = 8;
     hash = bcrypt.hashSync(password, saltRounds);
-    console.log(`register hash : ${hash}`);
+    console.log(`password hash : ${hash}`);
     return hash;
 }
 
