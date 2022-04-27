@@ -102,7 +102,7 @@ db.addCollection('hotels').insert([
 db.addCollection('rooms').insert([
     {
         id: uuid.v4(),
-        hotel_id: 1,
+        hotel_name: 1,
         room_number: 20,
         beds_number: 2,
         date_start: "2022-04-15", //format shuold be considered here
@@ -111,7 +111,7 @@ db.addCollection('rooms').insert([
     },
     {
         id: uuid.v4(),
-        hotel_id: 1,
+        hotel_name: 1,
         room_number: 51,
         beds_number: 4,
         date_start: "2022-04-22", //format shuold be considered here
@@ -120,7 +120,7 @@ db.addCollection('rooms').insert([
     },
     {
         id: uuid.v4(),
-        hotel_id: 3,
+        hotel_name: 3,
         room_number: 5,
         beds_number: 2,
         date_start: "2022-04-23", //format shuold be considered here

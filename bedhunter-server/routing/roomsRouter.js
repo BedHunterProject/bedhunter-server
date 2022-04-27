@@ -59,7 +59,7 @@ router.route('/:room_id')
                 'id': req.params.room_id
             }, (roomObject) => {
                 roomObject.id = uuid.v4();
-                roomObject.hotel_id = roomObject.hotel_id;
+                roomObject.hotel_name = roomObject.hotel_name;
                 roomObject.room_number = req.body.room_number;
                 roomObject.beds_number = req.body.beds_number;
                 roomObject.date_start = req.body.date_start;
@@ -91,7 +91,7 @@ router.param('room_id', (req, res, next, room_id) => {
 function createRoomObject(room) {
     var roomObject = {};
     roomObject.id = room.id;
-    roomObject.hotel_id = room.hotel_id;
+    roomObject.hotel_name = room.hotel_name;
     roomObject.room_number = room.room_number;
     roomObject.beds_number = room.beds_number;
     roomObject.date_start = room.date_start;
@@ -106,7 +106,7 @@ function PrintOutRoom(room, id) {
     } else {
         console.log(room.id);
     }
-    console.log(room.hotel_id);
+    console.log(room.hotel_name);
     console.log(room.room_number);
     console.log(room.beds_number);
     console.log(room.beds_number);
